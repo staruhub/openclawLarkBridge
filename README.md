@@ -136,6 +136,13 @@ YouTube 字幕抓取可能触发登录验证，可选方案：
 | `YTDLP_COOKIES_FILE` | | YouTube cookies |
 | `EXA_API_KEY` | | Exa 兜底解析 |
 
+### 配置路径（OpenClaw / Clawdbot）
+
+- OpenClaw 默认配置：`~/.openclaw/openclaw.json`。citeturn0search2
+- Clawdbot 默认配置：`~/.clawdbot/clawdbot.json`。citeturn0search4
+
+本项目会优先读取 OpenClaw 路径，找不到再回退到 Clawdbot 路径。
+
 ### OpenClaw/Clawdbot Gateway 配置示例
 
 ```json
