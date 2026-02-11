@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Python venv (optional link-parser)
+.venv-linkparser/
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Secrets (never commit!)
+secrets/
+*.secret
+*.key
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+/tmp/
+*.tmp
+
+# Build
+dist/
+build/

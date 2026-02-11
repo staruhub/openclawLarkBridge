@@ -1,0 +1,34 @@
+{
+  "name": "openclaw-lark-bridge",
+  "version": "4.1.0",
+  "description": "飞书/Lark ↔ OpenClaw Bridge - 让 OpenClaw 智能体在飞书中对话（长连接，无需公网）",
+  "main": "bridge.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node bridge.mjs",
+    "dev": "node --watch bridge.mjs"
+  },
+  "keywords": [
+    "feishu",
+    "lark",
+    "clawdbot",
+    "chatbot",
+    "ai",
+    "bridge"
+  ],
+  "author": "staruhub",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/staruhub/openclawLarkBridge.git"
+  },
+  "dependencies": {
+    "@larksuiteoapi/node-sdk": "^1.35.0",
+    "dotenv": "^16.4.5",
+    "form-data": "^4.0.0",
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
