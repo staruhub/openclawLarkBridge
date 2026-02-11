@@ -138,8 +138,8 @@ YouTube 字幕抓取可能触发登录验证，可选方案：
 
 ### 配置路径（OpenClaw / Clawdbot）
 
-- OpenClaw 默认配置：`~/.openclaw/openclaw.json`。citeturn0search2
-- Clawdbot 默认配置：`~/.clawdbot/clawdbot.json`。citeturn0search4
+- OpenClaw 默认配置：`~/.openclaw/openclaw.json`
+- Clawdbot 兼容路径：`~/.clawdbot/clawdbot.json`
 
 本项目会优先读取 OpenClaw 路径，找不到再回退到 Clawdbot 路径。
 
