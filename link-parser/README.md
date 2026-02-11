@@ -30,7 +30,7 @@ export YTDLP_COOKIES_FILE=/path/to/cookies.txt
 
 ## Feishu Bridge Integration
 
-Configured in `clawd/feishu-clawdbot-bridge/.env`:
+Configured in `openclawLarkBridge/.env`:
 
 - `FEISHU_LINK_AUTO_P2P=1`: in p2p chats, URL-only messages auto-parse
 - `FEISHU_LINK_PREFIXES=link:,链接:,解析:,url:`: explicit parsing in any chat

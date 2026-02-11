@@ -45,15 +45,15 @@ npm install
 
 ```bash
 # 创建 secrets 目录
-mkdir -p ~/.clawdbot/secrets
+mkdir -p ~/.openclaw/secrets
 
 # 写入飞书 App Secret
-echo "你的AppSecret" > ~/.clawdbot/secrets/feishu_app_secret
-chmod 600 ~/.clawdbot/secrets/feishu_app_secret
+echo "你的AppSecret" > ~/.openclaw/secrets/feishu_app_secret
+chmod 600 ~/.openclaw/secrets/feishu_app_secret
 
 # （可选）写入 AI API Key（用于语音/图片功能）
-echo "sk-xxxx" > ~/.clawdbot/secrets/ai_api_key
-chmod 600 ~/.clawdbot/secrets/ai_api_key
+echo "sk-xxxx" > ~/.openclaw/secrets/ai_api_key
+chmod 600 ~/.openclaw/secrets/ai_api_key
 
 # 复制并编辑配置文件
 cp .env.example .env
@@ -136,7 +136,7 @@ YouTube 字幕抓取可能触发登录验证，可选方案：
 | `YTDLP_COOKIES_FILE` | | YouTube cookies |
 | `EXA_API_KEY` | | Exa 兜底解析 |
 
-### Clawdbot Gateway 配置示例
+### OpenClaw/Clawdbot Gateway 配置示例
 
 ```json
 {
@@ -183,7 +183,7 @@ apt install fonts-wqy-microhei
 ## 安全与敏感信息
 
 - 不要提交 `.env` 或真实密钥到仓库。
-- 推荐将密钥写入 `~/.clawdbot/secrets/` 并通过路径读取。
+- 推荐将密钥写入 `~/.openclaw/secrets/` 并通过路径读取（兼容 `~/.clawdbot/secrets/`）。
 - `.env.example` 仅为示例，占位内容不可用于生产。
 
 ## 常见问题

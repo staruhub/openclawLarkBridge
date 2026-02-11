@@ -12,7 +12,10 @@ import WebSocket from 'ws';
 import 'dotenv/config';
 
 const APP_ID = process.env.FEISHU_APP_ID;
-const APP_SECRET_PATH = resolve(process.env.FEISHU_APP_SECRET_PATH || '~/.clawdbot/secrets/feishu_app_secret');
+const OPENCLAW_SECRETS_DIR = path.join(os.homedir(), '.openclaw', 'secrets');
+const CLAWDBOT_SECRETS_DIR = path.join(os.homedir(), '.clawdbot', 'secrets');
+const DEFAULT_SECRETS_DIR = fs.existsSync(OPENCLAW_SECRETS_DIR) ? OPENCLAW_SECRETS_DIR : CLAWDBOT_SECRETS_DIR;
+const APP_SECRET_PATH = resolve(process.env.FEISHU_APP_SECRET_PATH || path.join(DEFAULT_SECRETS_DIR, 'feishu_app_secret'));
 const DEFAULT_CONFIG_PATH = fs.existsSync(path.join(os.homedir(), '.openclaw', 'openclaw.json'))
   ? '~/.openclaw/openclaw.json'
   : '~/.clawdbot/clawdbot.json';
@@ -83,27 +86,36 @@ const FEISHU_BOT_OPEN_ID = String(process.env.FEISHU_BOT_OPEN_ID || '').trim();
 const FEISHU_BOT_USER_ID = String(process.env.FEISHU_BOT_USER_ID || '').trim();
 const FEISHU_SESSION_VERSION = String(process.env.FEISHU_SESSION_VERSION || '').trim();
 
-const AIHUBMIX_API_KEY = (() => {
+function readSecretFile(basename) {
   try {
-    return process.env.AIHUBMIX_API_KEY || fs.readFileSync(resolve('~/.clawdbot/secrets/aihubmix_api_key'), 'utf8').trim();
-  } catch { return ''; }
+    const p1 = path.join(OPENCLAW_SECRETS_DIR, basename);
+    if (fs.existsSync(p1)) return fs.readFileSync(p1, 'utf8').trim();
+    const p2 = path.join(CLAWDBOT_SECRETS_DIR, basename);
+    if (fs.existsSync(p2)) return fs.readFileSync(p2, 'utf8').trim();
+    return '';
+  } catch {
+    return '';
+  }
+}
+
+const AIHUBMIX_API_KEY = (() => {
+  const envKey = String(process.env.AIHUBMIX_API_KEY || '').trim();
+  if (envKey) return envKey;
+  return readSecretFile('aihubmix_api_key');
 })();
 const AIHUBMIX_BASE_URL = 'https://aihubmix.com/v1';
 
 // OpenAI-compatible API config (works for OpenAI itself and many proxies, including AIHubMix).
 // Keep backwards compatibility:
 // - If AI_API_KEY is set, it will be used.
-// - Else fall back to AIHUBMIX_API_KEY / ~/.clawdbot/secrets/aihubmix_api_key.
+// - Else fall back to AIHUBMIX_API_KEY / secrets (openclaw preferred, then clawdbot).
 const AI_API_BASE_URL = String(process.env.AI_API_BASE_URL || AIHUBMIX_BASE_URL || 'https://api.openai.com/v1').trim().replace(/\/+$/,'');
 const AI_API_KEY = (() => {
   try {
     const envKey = String(process.env.AI_API_KEY || '').trim();
     if (envKey) return envKey;
-    const f = resolve('~/.clawdbot/secrets/ai_api_key');
-    if (fs.existsSync(f)) {
-      const k = fs.readFileSync(f, 'utf8').trim();
-      if (k) return k;
-    }
+    const k = readSecretFile('ai_api_key');
+    if (k) return k;
     return String(AIHUBMIX_API_KEY || '').trim();
   } catch {
     return String(AIHUBMIX_API_KEY || '').trim();
