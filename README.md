@@ -2,6 +2,13 @@
 
 让 OpenClaw/Clawdbot 智能体直接在飞书里对话，无需公网服务器、无需域名、无需 ngrok。
 
+## 版本记录
+
+- 2026-02：群聊防误触发（仅 @ 或前缀）
+- 2026-02：新增链接解析链路（GitHub/公众号/网页/YouTube → Markdown）
+- 2026-02：YouTube 兜底（`yt-dlp` 被拦截时可选 `EXA_API_KEY`）
+- 2026-02：配置兼容升级（`AI_API_KEY + AI_API_BASE_URL`）
+
 ## 亮点
 
 - 纯 WebSocket 直连：飞书云端 ↔ 本地桥接
